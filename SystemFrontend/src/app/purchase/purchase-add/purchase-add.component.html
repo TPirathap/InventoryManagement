@@ -1,0 +1,69 @@
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Purchase</h4>
+            <ul class="breadcrumbs">
+                <li class="page-title">
+                    <a href="">Purchase</a>
+                </li>
+                <li class="separator">
+                    <i class="fas fa-angle-double-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="">Add Form</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Add Purchase Details</div>
+                    </div>
+                    <div class="card-body">
+                        <form autocomplete="off">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Product Name <span class="required-field">*</span></label>
+                                    <select class="form-control" formControlName="ProductID" name="ProductID" id="ProductID">
+                                        <option>Select the Product</option>
+                                        <!-- <option *ngFor="let candidate of CandidateDetails" value="{{candidate.CandidateID}}">
+                                            {{candidate.FirstName}} - {{candidate.MobileNo}}
+                                        </option> -->
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Purchase Date <span class="required-field">*</span></label>
+                                    <input type="Date" class="form-control" formControlName="Purchasedate" name="Purchasedate" id="Purchasedate" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Receive Quantity <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Receivequantity" name="Receivequantity" id="Receivequantity" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Supplier First Name <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Supplierfirstname" name="Supplierfirstname" id="Supplierfirstname" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Supplier Last Name<span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Supplierlastname" name="Supplierlastname" id="Supplierlastname" required>
+                                </div> 
+                                <div class="form-group col-md-6">
+                                </div> 
+                            </div>
+                            <div class="card-action">
+                                <button  routerLink="/purchase" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

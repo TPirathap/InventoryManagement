@@ -1,0 +1,76 @@
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Product</h4>
+            <ul class="breadcrumbs">
+                <li class="page-title">
+                    <a href="">Product</a>
+                </li>
+                <li class="separator">
+                    <i class="fas fa-angle-double-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="">Add Form</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Add Product Details</div>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="productAdd" autocomplete="off">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Product Name <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Productname" name="Productname" id="Productname" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Productname'].invalid && productAdd.controls['Productname'].touched">Product Name field is required.</span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Brand Name <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Brandname" name="Brandname" id="Brandname" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Label <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Labeldetails" name="Labeldetails" id="Labeldetails" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Starting Inventory <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Startinventory" name="Startinventory" id="Startinventory" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Minimum Required <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Minimumquantity" name="Minimumquantity" id="Minimumquantity" required>
+                                </div> 
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Unit Price <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Unitprice" name="Unitprice" id="Unitprice" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDefault">Selling Price <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Sellprice" name="Sellprice" id="Sellprice" required>
+                                </div> 
+                                <div class="form-group col-md-6">
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <button  routerLink="/product" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

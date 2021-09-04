@@ -1,0 +1,117 @@
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Product</h4>
+            <ul class="breadcrumbs">
+                <li class="page-title">
+                    <a href="">Product</a>
+                </li>
+                <li class="separator">
+                    <i class="fas fa-angle-double-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="">Details</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Product Details</div>
+                    </div>
+                    <div class="card-body">                         
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <a routerLink="/productAdd"><button class="btn btn-secondary"><i class="fas fa-plus"></i> Add</button></a>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="dataTables_length" id="basic-datatables_length">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="dataTables_filter">
+                                    <label>Search:<input type="text" class="form-control form-control-sm" name="searchvalue" placeholder="Search..."></label>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-head-bg-info table-bordered-bd-info">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col" (click)="sortDetails('id')">#</th> -->
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Label</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Inventory On hand</th>
+                                    <th scope="col">Minimum Required</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>sample data</td>
+                                    <td>sample data</td>
+                                    <td>sample data</td>
+                                    <td>sample data</td>
+                                    <td>sample data</td>
+                                    <td>sample data</td>
+                                    <td>
+                                        <span><a href="javascript:void(0)" (click)="viewClick()" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
+                                        <span><a href="javascript:void(0)" (click)="editClick()"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
+                                        <!-- <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span> -->
+                                    </td>
+                                </tr>
+                                <!-- <tr *ngFor="let dataItem of CanditateList">
+                                    <td>{{dataItem.CandidateID}}</td>
+                                    <td>{{dataItem.FirstName}}</td>
+                                    <td>{{dataItem.LastName}}</td>
+                                    <td>{{dataItem.Gender}}</td>
+                                    <td>{{dataItem.Email}}</td>
+                                    <td>{{dataItem.MobileNo}}</td>
+                                    <td>
+                                        <span><a href="javascript:void(0)" (click)="viewClick(dataItem)" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
+                                        <span><a href="javascript:void(0)" (click)="editClick(dataItem)"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
+                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite"></div></div>
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
+                                        <!-- <ul class="pagination">
+                                            <li class="paginate_button page-item previous disabled" id="basic-datatables_previous">
+                                                <a aria-controls="basic-datatables" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                            </li>
+                                            <li class="paginate_button page-item active">
+                                                <a aria-controls="basic-datatables" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a aria-controls="basic-datatables" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a aria-controls="basic-datatables" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a aria-controls="basic-datatables" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                                            </li>
+                                            <li class="paginate_button page-item next" id="basic-datatables_next">
+                                                <a aria-controls="basic-datatables" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                                            </li>
+                                        </ul> -->
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
