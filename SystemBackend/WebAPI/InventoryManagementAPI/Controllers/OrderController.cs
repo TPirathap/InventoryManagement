@@ -18,7 +18,9 @@ namespace InventoryManagementAPI.Controllers
 
         public HttpResponseMessage Get()
         {
-            string query = "SELECT * FROM Order";
+            string query = @"SELECT Orders.*, Product.ProductName
+                            FROM Orders
+                            INNER JOIN Product ON Product.ProductID=Orders.ProductID";
             var cmd = new SqlCommand(query, con);
             var data = new SqlDataAdapter(cmd);
             {
@@ -28,32 +30,20 @@ namespace InventoryManagementAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, table);
         }
 
-        /*[HttpGet]
-        [Route("api/Order/GetOrderProductDetails")]
-        public HttpResponseMessage GetProductDetails()
-        {
-            string query = "SELECT ProductID, ProductName FROM Product";
-            var cmd = new SqlCommand(query, con);
-            var data = new SqlDataAdapter(cmd);
-            {
-                cmd.CommandType = CommandType.Text;
-                data.Fill(table);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, table);
-        }*/
-
         public string Post(Order order)
         {
+            var statusDetails = "Active";
             try
             {
-                string query = @"INSERT INTO Order 
+                string query = @"INSERT INTO Orders 
                                 VALUES('" + order.ProductID + @"',
                                         '" + order.InvoiceNo + @"',
                                         '" + order.OrderDate + @"',
                                         '" + order.ShippedQuantity + @"',
                                         '" + order.TotalAmount + @"',
                                         '" + order.CustomerFirstName + @"',
-                                        '" + order.CustomerLastName + @"')";
+                                        '" + order.CustomerLastName + @"',
+                                        '" + statusDetails + @"')";
 
                 var cmd = new SqlCommand(query, con);
                 var data = new SqlDataAdapter(cmd);
@@ -67,6 +57,30 @@ namespace InventoryManagementAPI.Controllers
             catch
             {
                 return "Failed to Add!!";
+            }
+        }
+
+        public string Put(Order order)
+        {
+            var statusDetails = "Deleted";
+            try
+            {
+                string query = @"UPDATE Orders SET 
+                                StatusDetail='" + statusDetails + @"'
+                                WHERE OrderID='" + order.OrderID + @"'";
+
+                var cmd = new SqlCommand(query, con);
+                var data = new SqlDataAdapter(cmd);
+                {
+                    cmd.CommandType = CommandType.Text;
+                    data.Fill(table);
+                }
+                return "Delete Successfully!!";
+            }
+
+            catch
+            {
+                return "Failed to Delete!!";
             }
         }
     }

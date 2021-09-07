@@ -28,7 +28,7 @@ namespace InventoryManagementAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, table);
         }
 
-        //this api use to product edit
+        //this api use to product edit page
         [HttpGet]
         [Route("api/Product/GetProductDetails/{productId}")]
         public HttpResponseMessage GetProductDetails(int productId)
@@ -89,9 +89,11 @@ namespace InventoryManagementAPI.Controllers
 
         public string Put(Product product)
         {
-            try
+            if (product.ProductID != null)
             {
-                string query = @"UPDATE Product SET 
+                try
+                {
+                    string query = @"UPDATE Product SET 
                                 ProductName='" + product.ProductName + @"', 
                                 BrandName='" + product.BrandName + @"', 
                                 Label='" + product.Label + @"', 
@@ -101,18 +103,23 @@ namespace InventoryManagementAPI.Controllers
                                 SellPrice='" + product.SellPrice + @"'
                                 WHERE ProductID='" + product.ProductID + @"'";
 
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
+                    var cmd = new SqlCommand(query, con);
+                    var data = new SqlDataAdapter(cmd);
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        data.Fill(table);
+                    }
+                    return "Update Successfully!!";
                 }
-                return "Update Successfully!!";
-            }
 
-            catch
+                catch
+                {
+                    return "Failed to Update!!";
+                }
+            }
+            else
             {
-                return "Failed to Update!!";
+                return "Some data are missing!!";
             }
         }
 

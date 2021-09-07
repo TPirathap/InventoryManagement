@@ -18,7 +18,9 @@ namespace InventoryManagementAPI.Controllers
 
         public HttpResponseMessage Get()
         {
-            string query = "SELECT * FROM Purchase";
+            string query = @"SELECT Purchase.*, Product.ProductName
+                            FROM Purchase
+                            INNER JOIN Product ON Product.ProductID=Purchase.ProductID";
             var cmd = new SqlCommand(query, con);
             var data = new SqlDataAdapter(cmd);
             {
@@ -44,6 +46,7 @@ namespace InventoryManagementAPI.Controllers
 
         public string Post(Purchase purchase)
         {
+            var statusDetails = "Active";
             try
             {
                 string query = @"INSERT INTO Purchase 
@@ -51,7 +54,8 @@ namespace InventoryManagementAPI.Controllers
                                         '" + purchase.PurchaseDate + @"',
                                         '" + purchase.ReceiveQuantity + @"',
                                         '" + purchase.SupplierFirstName + @"',
-                                        '" + purchase.SupplierLastName + @"')";
+                                        '" + purchase.SupplierLastName + @"',
+                                        '" + statusDetails + @"')";
 
                 var cmd = new SqlCommand(query, con);
                 var data = new SqlDataAdapter(cmd);
@@ -65,6 +69,30 @@ namespace InventoryManagementAPI.Controllers
             catch
             {
                 return "Failed to Add!!";
+            }
+        }
+
+        public string Put(Purchase purchase)
+        {
+            var statusDetails = "Deleted";
+            try
+            {
+                string query = @"UPDATE Purchase SET 
+                                StatusDetail='" + statusDetails + @"'
+                                WHERE PurchaseID='" + purchase.PurchaseID + @"'";
+
+                var cmd = new SqlCommand(query, con);
+                var data = new SqlDataAdapter(cmd);
+                {
+                    cmd.CommandType = CommandType.Text;
+                    data.Fill(table);
+                }
+                return "Delete Successfully!!";
+            }
+
+            catch
+            {
+                return "Failed to Delete!!";
             }
         }
     }
