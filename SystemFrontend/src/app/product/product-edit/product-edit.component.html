@@ -4,13 +4,13 @@
             <h4 class="page-title">Product</h4>
             <ul class="breadcrumbs">
                 <li class="page-title">
-                    <a href="">Product</a>
+                    <a routerLink="/product" href="">Product</a>
                 </li>
                 <li class="separator">
                     <i class="fas fa-angle-double-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="">Edit Form</a>
+                    <a>Edit Form</a>
                 </li>
             </ul>
         </div>
@@ -21,51 +21,65 @@
                         <div class="card-title">Change Product Details</div>
                     </div>
                     <div class="card-body">
-                        <form autocomplete="off">
+                        <form [formGroup]="productUpdate" (ngSubmit)="onUpdate()" autocomplete="off">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Product Name <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Productname" name="Productname" id="Productname" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Productname'].invalid && productUpdate.controls['Productname'].touched">Product Name field is required.</span>
+                                    <input type="hidden" class="form-control" formControlName="ProductID" name="ProductID" id="ProductID">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Brand Name <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Brandname" name="Brandname" id="Brandname" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Brandname'].invalid && productUpdate.controls['Brandname'].touched">Brand Name field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Label <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" formControlName="Labeldetails" name="Labeldetails" id="Labeldetails" required>
+                                    <input type="text" class="form-control" formControlName="Label" name="Label" id="Label" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Label'].invalid && productUpdate.controls['Label'].touched">Label field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Starting Inventory <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Startinventory" name="Startinventory" id="Startinventory" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Startinventory'].invalid && productUpdate.controls['Startinventory'].touched">Starting Inventory field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Minimum Required <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" formControlName="Minimumquantity" name="Minimumquantity" id="Minimumquantity" required>
+                                    <input type="text" class="form-control" formControlName="Minimuminventory" name="Minimuminventory" id="Minimuminventory" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Minimuminventory'].invalid && productUpdate.controls['Minimuminventory'].touched">Minimum Inventory field is required.</span>
                                 </div> 
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Unit Price <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Unitprice" name="Unitprice" id="Unitprice" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Unitprice'].invalid && productUpdate.controls['Unitprice'].touched">Unit Price field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Selling Price <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Sellprice" name="Sellprice" id="Sellprice" required>
+                                    <span class="validation-error" *ngIf="productUpdate.controls['Sellprice'].invalid && productUpdate.controls['Sellprice'].touched">Selling Price field is required.</span>
                                 </div> 
                                 <div class="form-group col-md-6">
                                 </div>
                             </div>
                             <div class="card-action">
-                                <button  routerLink="/product" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
+                                <button routerLink="/product" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
                                 <button class="btn btn-success">Change</button>
                             </div>
                         </form>
                     </div>
+                    <!-- <table>
+                        <div *ngFor="let dataItem of productEditDataList">
+                            <tr><th style="width: 50%;">Product Name</th><td> {{dataItem.ProductName}}</td></tr>
+                            <tr><th style="width: 50%;">Brand Name</th><td> {{dataItem.BrandName}}</td></tr>
+                        </div>
+                    </table> -->
                 </div>
             </div>
         </div>

@@ -16,6 +16,10 @@ import { OrderComponent } from './order/order.component';
 import { OrderAddComponent } from './order/order-add/order-add.component';
 import { ReportComponent } from './report/report.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DailyOrdersComponent } from './report/daily-orders/daily-orders.component';
+import { SearchFilterPipe } from './search-filter.pipe';
+import { SearchPurchasePipe } from './pipes/search-purchase.pipe';
+import { SearchOrderPipe } from './pipes/search-order.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     OrderComponent,
     OrderAddComponent,
     ReportComponent,
+    DailyOrdersComponent,
+    SearchFilterPipe,
+    SearchPurchasePipe,
+    SearchOrderPipe,
   ],
   imports: [
     BrowserModule,

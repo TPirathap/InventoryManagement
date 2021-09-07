@@ -1,10 +1,10 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Inventory</h4>
+            <h4 class="page-title">Dashboard</h4>
             <ul class="breadcrumbs">
                 <li class="page-title">
-                    <a href="">Current Inventory</a>
+                    <a href="">Dashboard</a>
                 </li>
                 <li class="separator">
                     <i class="fas fa-angle-double-right"></i>
@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Details</div>
+                        <div class="card-title">Dashboard</div>
                     </div>
                     <!-- Product table -->
                     <div class="card-body">                         
@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="dataTables_filter">
-                                    <label>Search:<input type="text" class="form-control form-control-sm" name="searchvalue" placeholder="Search..."></label>
+                                    <label>Search:<input type="text" class="form-control form-control-sm" [(ngModel)]="searchValue" name="searchvalue" placeholder="Search..."></label>
                                 </div>
                             </div>
                         </div>
@@ -47,25 +47,19 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Brand</th>
                                     <th scope="col">Label</th>
-                                    <th scope="col">Start Inventory</th>
-                                    <th scope="col">Inventory Received</th>
-                                    <th scope="col">Inventory On hand</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Minimum Required</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let dataItem of CanditateList">
-                                    <td>{{dataItem.CandidateID}}</td>
-                                    <td>{{dataItem.FirstName}}</td>
-                                    <td>{{dataItem.LastName}}</td>
-                                    <td>{{dataItem.Gender}}</td>
-                                    <td>{{dataItem.Email}}</td>
-                                    <td>{{dataItem.MobileNo}}</td>
-                                    <td>
-                                        <span><a href="javascript:void(0)" (click)="viewClick(dataItem)" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="editClick(dataItem)"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span>
-                                    </td>
-                                </tr> -->
+                                <tr *ngFor="let dataItem of ProductsList | searchFilter:searchValue">
+                                    <td>{{dataItem.ProductID}}</td>
+                                    <td>{{dataItem.ProductName}}</td>
+                                    <td>{{dataItem.BrandName}}</td>
+                                    <td>{{dataItem.Label}}</td>
+                                    <td>{{dataItem.UnitPrice | currency: 'LKR': 'code'}}</td>
+                                    <td>{{dataItem.MinimumInventory}}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="row">
@@ -112,7 +106,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="dataTables_filter">
-                                    <label>Search:<input type="text" class="form-control form-control-sm" name="searchvalue" placeholder="Search..."></label>
+                                    <label>Search:<input type="text" class="form-control form-control-sm" [(ngModel)]="searchPurch" name="searchPurch" placeholder="Search..."></label>
                                 </div>
                             </div>
                         </div>
@@ -121,28 +115,21 @@
                                 <tr>
                                     <!-- <th scope="col" (click)="sortDetails('id')">#</th> -->
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Label</th>
-                                    <th scope="col">Start Inventory</th>
-                                    <th scope="col">Inventory Received</th>
-                                    <th scope="col">Inventory On hand</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Purchase Date</th>
+                                    <th scope="col">Receive Quantity</th>
+                                    <th scope="col">Supplier First Name</th>
+                                    <th scope="col">Supplier Last Name</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let dataItem of CanditateList">
-                                    <td>{{dataItem.CandidateID}}</td>
-                                    <td>{{dataItem.FirstName}}</td>
-                                    <td>{{dataItem.LastName}}</td>
-                                    <td>{{dataItem.Gender}}</td>
-                                    <td>{{dataItem.Email}}</td>
-                                    <td>{{dataItem.MobileNo}}</td>
-                                    <td>
-                                        <span><a href="javascript:void(0)" (click)="viewClick(dataItem)" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="editClick(dataItem)"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span>
-                                    </td>
-                                </tr> -->
+                                <tr *ngFor="let dataItem of purchasesList | searchPurchase:searchPurch">
+                                    <td>{{dataItem.PurchaseID}}</td>
+                                    <td>{{dataItem.ProductName}}</td>
+                                    <td>{{dataItem.PurchaseDate | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{dataItem.ReceiveQuantity}}</td>
+                                    <td>{{dataItem.SupplierFirstName}}</td>
+                                    <td>{{dataItem.SupplierLastName}}</td>
                             </tbody>
                         </table>
                         <div class="row">
@@ -189,7 +176,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="dataTables_filter">
-                                    <label>Search:<input type="text" class="form-control form-control-sm" name="searchvalue" placeholder="Search..."></label>
+                                    <label>Search:<input type="text" class="form-control form-control-sm" [(ngModel)]="searchOrders" name="searchOrders" placeholder="Search..."></label>
                                 </div>
                             </div>
                         </div>
@@ -198,28 +185,21 @@
                                 <tr>
                                     <!-- <th scope="col" (click)="sortDetails('id')">#</th> -->
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Label</th>
-                                    <th scope="col">Start Inventory</th>
-                                    <th scope="col">Inventory Received</th>
-                                    <th scope="col">Inventory On hand</th>
-                                </tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Invoice No</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Shipped Quantity</th>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let dataItem of CanditateList">
-                                    <td>{{dataItem.CandidateID}}</td>
-                                    <td>{{dataItem.FirstName}}</td>
-                                    <td>{{dataItem.LastName}}</td>
-                                    <td>{{dataItem.Gender}}</td>
-                                    <td>{{dataItem.Email}}</td>
-                                    <td>{{dataItem.MobileNo}}</td>
-                                    <td>
-                                        <span><a href="javascript:void(0)" (click)="viewClick(dataItem)" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="editClick(dataItem)"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span>
-                                    </td>
-                                </tr> -->
+                                <tr *ngFor="let dataItem of ordersList | searchOrder:searchOrders">
+                                    <td>{{dataItem.OrderID}}</td>
+                                    <td> {{dataItem.ProductName}}</td>
+                                    <td>{{dataItem.InvoiceNo}}</td>
+                                    <td>{{dataItem.OrderDate | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{dataItem.TotalAmount | currency: 'LKR': 'code'}}</td>
+                                    <td>{{dataItem.ShippedQuantity}}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="row">

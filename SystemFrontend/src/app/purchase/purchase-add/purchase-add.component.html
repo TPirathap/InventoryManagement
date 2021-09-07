@@ -21,36 +21,41 @@
                         <div class="card-title">Add Purchase Details</div>
                     </div>
                     <div class="card-body">
-                        <form autocomplete="off">
+                        <form [formGroup]="purchaseAdd" (ngSubmit)="onSubmit()" autocomplete="off">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Product Name <span class="required-field">*</span></label>
                                     <select class="form-control" formControlName="ProductID" name="ProductID" id="ProductID">
                                         <option>Select the Product</option>
-                                        <!-- <option *ngFor="let candidate of CandidateDetails" value="{{candidate.CandidateID}}">
-                                            {{candidate.FirstName}} - {{candidate.MobileNo}}
-                                        </option> -->
+                                        <option *ngFor="let product of productsList" value="{{product.ProductID}}">
+                                            {{product.ProductName}}
+                                        </option>
                                     </select>
+                                    <span class="validation-error" *ngIf="purchaseAdd.controls['ProductID'].invalid && purchaseAdd.controls['ProductID'].touched">Product Name field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Purchase Date <span class="required-field">*</span></label>
                                     <input type="Date" class="form-control" formControlName="Purchasedate" name="Purchasedate" id="Purchasedate" required>
+                                    <span class="validation-error" *ngIf="purchaseAdd.controls['Purchasedate'].invalid && purchaseAdd.controls['Purchasedate'].touched">Purchase date field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Receive Quantity <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Receivequantity" name="Receivequantity" id="Receivequantity" required>
+                                    <span class="validation-error" *ngIf="purchaseAdd.controls['Receivequantity'].invalid && purchaseAdd.controls['Receivequantity'].touched">Receive Quantity field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Supplier First Name <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Supplierfirstname" name="Supplierfirstname" id="Supplierfirstname" required>
+                                    <span class="validation-error" *ngIf="purchaseAdd.controls['Supplierfirstname'].invalid && purchaseAdd.controls['Supplierfirstname'].touched">Supplier First Name field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Supplier Last Name<span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Supplierlastname" name="Supplierlastname" id="Supplierlastname" required>
+                                    <span class="validation-error" *ngIf="purchaseAdd.controls['Supplierlastname'].invalid && purchaseAdd.controls['Supplierlastname'].touched">Supplier Last Name field is required.</span>
                                 </div> 
                                 <div class="form-group col-md-6">
                                 </div> 

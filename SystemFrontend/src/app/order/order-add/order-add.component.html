@@ -21,46 +21,53 @@
                         <div class="card-title">Add Order Details</div>
                     </div>
                     <div class="card-body">
-                        <form autocomplete="off">
+                        <form [formGroup]="orderAdd" (ngSubmit)="onSubmit()" autocomplete="off">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Product Name <span class="required-field">*</span></label>
                                     <select class="form-control" formControlName="ProductID" name="ProductID" id="ProductID">
                                         <option>Select the Product</option>
-                                        <!-- <option *ngFor="let candidate of CandidateDetails" value="{{candidate.CandidateID}}">
-                                            {{candidate.FirstName}} - {{candidate.MobileNo}}
-                                        </option> -->
+                                        <option *ngFor="let product of productsList" value="{{product.ProductID}}">
+                                            {{product.ProductName}}
+                                        </option>
                                     </select>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['ProductID'].invalid && orderAdd.controls['ProductID'].touched">Product Name field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Invoice No <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Invoiceno" name="Invoiceno" id="Invoiceno" required>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['Invoiceno'].invalid && orderAdd.controls['Invoiceno'].touched">Invoice No field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Order Date <span class="required-field">*</span></label>
                                     <input type="Date" class="form-control" formControlName="Orderdate" name="Orderdate" id="Orderdate" required>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['Orderdate'].invalid && orderAdd.controls['Orderdate'].touched">Order Date field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Shipped Quantity <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Shippedquantity" name="Shippedquantity" id="Shippedquantity" required>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['Shippedquantity'].invalid && orderAdd.controls['Shippedquantity'].touched">Shipped Quantity field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Total Amount <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" formControlName="Totalprice" name="Totalprice" id="Totalprice" required>
+                                    <input type="text" class="form-control" formControlName="Totalamount" name="Totalamount" id="Totalamount" required>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['Totalamount'].invalid && orderAdd.controls['Totalamount'].touched">Total Amount field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Customer First Name <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Customerfirstname" name="Customerfirstname" id="Customerfirstname" required>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['Customerfirstname'].invalid && orderAdd.controls['Customerfirstname'].touched">Customer First Name field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Customer Last Name<span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Customerlastname" name="Customerlastname" id="Customerlastname" required>
+                                    <span class="validation-error" *ngIf="orderAdd.controls['Customerlastname'].invalid && orderAdd.controls['Customerlastname'].touched">Customer Last Name field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                 </div>

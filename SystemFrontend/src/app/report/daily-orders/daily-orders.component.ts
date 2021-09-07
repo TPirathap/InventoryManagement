@@ -1,26 +1,26 @@
-import { ReportService } from './../service/report.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReportService } from 'src/app/service/report.service';
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.css']
+  selector: 'app-daily-orders',
+  templateUrl: './daily-orders.component.html',
+  styleUrls: ['./daily-orders.component.css']
 })
-export class ReportComponent implements OnInit {
+export class DailyOrdersComponent implements OnInit {
 
   reportDate:FormGroup;
   StartDate:string;
-  purchaseDetailsList:any;
+  orderDetailsList:any;
   constructor(
     private reportService:ReportService,
     private formBuilder:FormBuilder,
   ) { }
 
   selectDate(StartDate){
-    this.reportService.getAllPurchase(StartDate)
+    this.reportService.getAllOrders(StartDate)
         .subscribe((data:any)=>{
-        this.purchaseDetailsList=data;
+        this.orderDetailsList=data;
         this.ngOnInit();
       });
   }

@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="dataTables_filter">
-                                    <label>Search:<input type="text" class="form-control form-control-sm" name="searchvalue" placeholder="Search..."></label>
+                                    <label>Search:<input type="text" class="form-control form-control-sm" [(ngModel)]="searchValue" name="searchvalue" placeholder="Search..."></label>
                                 </div>
                             </div>
                         </div>
@@ -45,39 +45,24 @@
                                     <th scope="col">Brand</th>
                                     <th scope="col">Label</th>
                                     <th scope="col">Unit Price</th>
-                                    <th scope="col">Inventory On hand</th>
                                     <th scope="col">Minimum Required</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>sample data</td>
-                                    <td>sample data</td>
-                                    <td>sample data</td>
-                                    <td>sample data</td>
-                                    <td>sample data</td>
-                                    <td>sample data</td>
-                                    <td>
-                                        <span><a href="javascript:void(0)" (click)="viewClick()" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="editClick()"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
-                                        <!-- <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span> -->
-                                    </td>
-                                </tr>
-                                <!-- <tr *ngFor="let dataItem of CanditateList">
-                                    <td>{{dataItem.CandidateID}}</td>
-                                    <td>{{dataItem.FirstName}}</td>
-                                    <td>{{dataItem.LastName}}</td>
-                                    <td>{{dataItem.Gender}}</td>
-                                    <td>{{dataItem.Email}}</td>
-                                    <td>{{dataItem.MobileNo}}</td>
+                                <tr *ngFor="let dataItem of ProductsList | searchFilter:searchValue">
+                                    <td>{{dataItem.ProductID}}</td>
+                                    <td>{{dataItem.ProductName}}</td>
+                                    <td>{{dataItem.BrandName}}</td>
+                                    <td>{{dataItem.Label}}</td>
+                                    <td>{{dataItem.UnitPrice | currency: 'LKR': 'code'}}</td>
+                                    <td>{{dataItem.MinimumInventory}}</td>
                                     <td>
                                         <span><a href="javascript:void(0)" (click)="viewClick(dataItem)" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
                                         <span><a href="javascript:void(0)" (click)="editClick(dataItem)"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span>
+                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.ProductID)" class="fas fa-trash-alt" title="Delete"></a></span>
                                     </td>
-                                </tr> -->
+                                </tr>
                             </tbody>
                         </table>
                         <div class="row">

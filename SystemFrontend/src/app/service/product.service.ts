@@ -12,6 +12,22 @@ export class ProductService {
   constructor(private http:HttpClient) { }
   
   getProductDetails():Observable<Product[]>{
-    return this.http.get<Product[]>(this.APIUrl + '/Candidate');    
+    return this.http.get<Product[]>(this.APIUrl + '/Product');    
+  }
+
+  getProductById(ProductID: any):Observable<Product>{
+    return this.http.get<Product>(this.APIUrl + '/Product/GetProductDetails/' + ProductID);
+  }
+
+  addProduct(product: Product):Observable<Product>{
+    return this.http.post<Product>(this.APIUrl + '/Product', product);
+  }
+
+  editProduct(productDetails: Product):Observable<Product>{
+    return this.http.put<Product>(this.APIUrl + '/Product', productDetails);
+  }
+
+  deleteProduct(ProductID: any){
+    return this.http.delete(this.APIUrl + '/Product/' + ProductID);
   }
 }

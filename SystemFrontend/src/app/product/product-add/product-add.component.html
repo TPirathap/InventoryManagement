@@ -21,7 +21,7 @@
                         <div class="card-title">Add Product Details</div>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="productAdd" autocomplete="off">
+                        <form [formGroup]="productAdd" (ngSubmit)="onSubmit()" autocomplete="off">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Product Name <span class="required-field">*</span></label>
@@ -31,38 +31,44 @@
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Brand Name <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Brandname" name="Brandname" id="Brandname" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Brandname'].invalid && productAdd.controls['Brandname'].touched">Brand Name field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Label <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" formControlName="Labeldetails" name="Labeldetails" id="Labeldetails" required>
+                                    <input type="text" class="form-control" formControlName="Label" name="Label" id="Label" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Label'].invalid && productAdd.controls['Label'].touched">Label field is required.</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Starting Inventory <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Startinventory" name="Startinventory" id="Startinventory" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Startinventory'].invalid && productAdd.controls['Startinventory'].touched">Starting Inventory field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputDefault">Minimum Required <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" formControlName="Minimumquantity" name="Minimumquantity" id="Minimumquantity" required>
+                                    <label for="inputDefault">Minimum Inventory <span class="required-field">*</span></label>
+                                    <input type="text" class="form-control" formControlName="Minimuminventory" name="Minimuminventory" id="Minimuminventory" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Minimuminventory'].invalid && productAdd.controls['Minimuminventory'].touched">Minimum Inventory field is required.</span>
                                 </div> 
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Unit Price <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Unitprice" name="Unitprice" id="Unitprice" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Unitprice'].invalid && productAdd.controls['Unitprice'].touched">Unit Price field is required.</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputDefault">Selling Price <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" formControlName="Sellprice" name="Sellprice" id="Sellprice" required>
+                                    <span class="validation-error" *ngIf="productAdd.controls['Sellprice'].invalid && productAdd.controls['Sellprice'].touched">Selling Price field is required.</span>
                                 </div> 
                                 <div class="form-group col-md-6">
                                 </div>
                             </div>
                             <div class="card-action">
-                                <button  routerLink="/product" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
+                                <button routerLink="/product" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
                                 <button class="btn btn-success">Submit</button>
                             </div>
                         </form>

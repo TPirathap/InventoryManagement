@@ -4,7 +4,7 @@
             <h4 class="page-title">Report</h4>
             <ul class="breadcrumbs">
                 <li class="page-title">
-                    <a href="">Daily Purchase Report</a>
+                    <a href="">Daily Order Report</a>
                 </li>
                 <li class="separator">
                     <i class="fas fa-angle-double-right"></i>
@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Daily Purchase Report</div>
+                        <div class="card-title">Daily Order Report</div>
                     </div>
                     <div class="card-body">
                         <!-- <table class="table table-bordered table-head-bg-info table-bordered-bd-info">
@@ -59,33 +59,33 @@
                                 <!-- <th scope="col" (click)="sortDetails('id')">#</th> -->
                                 <th scope="col">#</th>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Purchase Date</th>
-                                <th scope="col">Receive Quantity</th>
-                                <th scope="col">Supplier First Name</th>
-                                <th scope="col">Supplier Last Name</th>
-                                <th scope="col">Status</th>
+                                    <th scope="col">Invoice No</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Shipped Quantity</th>
+                                    <th scope="col">Customer First Name</th>
+                                    <th scope="col">Customer Last Name</th>
+                                    <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let dataItem of purchaseDetailsList">
-                                <td>{{dataItem.PurchaseID}}</td>
-                                <td>{{dataItem.ProductName}}</td>
-                                <td>{{dataItem.PurchaseDate | date:'dd/MM/yyyy'}}</td>
-                                <td>{{dataItem.ReceiveQuantity}}</td>
-                                <td>{{dataItem.SupplierFirstName}}</td>
-                                <td>{{dataItem.SupplierLastName}}</td>
-                                <td [ngStyle]="{'color':dataItem.StatusDetail === 'Deleted' ? 'red' : 'green'}"> {{dataItem.StatusDetail}}</td>
+                            <tr *ngFor="let dataItem of orderDetailsList">
+                                <td>{{dataItem.OrderID}}</td>
+                                    <td>{{dataItem.ProductName}}</td>
+                                    <td>{{dataItem.InvoiceNo}}</td>
+                                    <td>{{dataItem.OrderDate | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{dataItem.TotalAmount | currency: 'LKR': 'code'}}</td>
+                                    <td>{{dataItem.ShippedQuantity}}</td>
+                                    <td>{{dataItem.CustomerFirstName}}</td>
+                                    <td>{{dataItem.CustomerLastName}}</td>
+                                    <td [ngStyle]="{'color':dataItem.StatusDetail === 'Deleted' ? 'red' : 'limegreen'}"> {{dataItem.StatusDetail}}</td>
                             </tr>
                         </tbody>
                     </table>
-
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 

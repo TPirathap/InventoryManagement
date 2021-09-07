@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="dataTables_filter">
-                                    <label>Search:<input type="text" class="form-control form-control-sm" name="searchvalue" placeholder="Search..."></label>
+                                    <label>Search:<input type="text" class="form-control form-control-sm" [(ngModel)]="searchOrders" name="searchOrders" placeholder="Search..."></label>
                                 </div>
                             </div>
                         </div>
@@ -48,22 +48,25 @@
                                     <th scope="col">Shipped Quantity</th>
                                     <th scope="col">Customer First Name</th>
                                     <th scope="col">Customer Last Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let dataItem of CanditateList">
-                                    <td>{{dataItem.CandidateID}}</td>
-                                    <td>{{dataItem.FirstName}}</td>
-                                    <td>{{dataItem.LastName}}</td>
-                                    <td>{{dataItem.Gender}}</td>
-                                    <td>{{dataItem.Email}}</td>
-                                    <td>{{dataItem.MobileNo}}</td>
+                                <tr *ngFor="let dataItem of ordersList | searchOrder:searchOrders">
+                                    <td>{{dataItem.OrderID}}</td>
+                                    <td>{{dataItem.ProductName}}</td>
+                                    <td>{{dataItem.InvoiceNo}}</td>
+                                    <td>{{dataItem.OrderDate | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{dataItem.TotalAmount | currency: 'LKR': 'code'}}</td>
+                                    <td>{{dataItem.ShippedQuantity}}</td>
+                                    <td>{{dataItem.CustomerFirstName}}</td>
+                                    <td>{{dataItem.CustomerLastName}}</td>
+                                    <td [ngStyle]="{'color':dataItem.StatusDetail === 'Deleted' ? 'red' : 'limegreen'}"> {{dataItem.StatusDetail}}</td>
                                     <td>
-                                        <span><a href="javascript:void(0)" (click)="viewClick(dataItem)" class="far fa-eye" title="Quick View"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="editClick(dataItem)"  class="fas fa-pencil-alt" title="Edit"></a></span>&nbsp;&nbsp;
-                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem.CandidateID)" class="fas fa-trash-alt" title="Delete"></a></span>
+                                        <span><a href="javascript:void(0)" (click)="deleteClick(dataItem)" class="fas fa-trash-alt" title="Delete"></a></span>
                                     </td>
-                                </tr> -->
+                                </tr>
                             </tbody>
                         </table>
                         <div class="row">
