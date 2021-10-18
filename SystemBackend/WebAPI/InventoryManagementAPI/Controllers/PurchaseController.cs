@@ -1,4 +1,5 @@
-﻿using InventoryManagementAPI.Models;
+﻿using InventoryManagementAPI.DataAccess;
+using InventoryManagementAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,21 +14,15 @@ namespace InventoryManagementAPI.Controllers
 {
     public class PurchaseController : ApiController
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["InventoryManagement"].ConnectionString);
-        DataTable table = new DataTable();
-
+        PurchaseData purchaseDataAccess;
+        public PurchaseController()
+        {
+            this.purchaseDataAccess = new PurchaseData();
+        }
         public HttpResponseMessage Get()
         {
-            string query = @"SELECT Purchase.*, Product.ProductName
-                            FROM Purchase
-                            INNER JOIN Product ON Product.ProductID=Purchase.ProductID";
-            var cmd = new SqlCommand(query, con);
-            var data = new SqlDataAdapter(cmd);
-            {
-                cmd.CommandType = CommandType.Text;
-                data.Fill(table);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            var purchaseDetails = purchaseDataAccess.GetPurchase();
+            return Request.CreateResponse(HttpStatusCode.OK, purchaseDetails);
         }
 
         /*[HttpGet]
@@ -46,54 +41,22 @@ namespace InventoryManagementAPI.Controllers
 
         public string Post(Purchase purchase)
         {
-            var statusDetails = "Active";
-            try
-            {
-                string query = @"INSERT INTO Purchase 
-                                VALUES('" + purchase.ProductID + @"',
-                                        '" + purchase.PurchaseDate + @"',
-                                        '" + purchase.ReceiveQuantity + @"',
-                                        '" + purchase.SupplierFirstName + @"',
-                                        '" + purchase.SupplierLastName + @"',
-                                        '" + statusDetails + @"')";
-
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
-                }
-                return "Add Successfully!!";
-            }
-
-            catch
-            {
-                return "Failed to Add!!";
-            }
+            var purchaseDetails = purchaseDataAccess.StorePurchase(purchase);
+            return purchaseDetails;
         }
 
         public string Put(Purchase purchase)
         {
-            var statusDetails = "Deleted";
-            try
+            if (purchase.PurchaseID != null)
             {
-                string query = @"UPDATE Purchase SET 
-                                StatusDetail='" + statusDetails + @"'
-                                WHERE PurchaseID='" + purchase.PurchaseID + @"'";
-
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
-                }
-                return "Delete Successfully!!";
+                var purchaseDetails = purchaseDataAccess.ModifyPurchase(purchase);
+                return purchaseDetails;
             }
-
-            catch
+            else
             {
-                return "Failed to Delete!!";
+                return "Some data are missing!!";
             }
+            
         }
     }
 }

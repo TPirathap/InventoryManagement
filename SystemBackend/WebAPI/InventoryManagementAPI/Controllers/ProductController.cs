@@ -1,4 +1,5 @@
 ﻿using InventoryManagementAPI.Models;
+using InventoryManagementAPI.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,19 +14,16 @@ namespace InventoryManagementAPI.Controllers
 {
     public class ProductController : ApiController
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["InventoryManagement"].ConnectionString);
-        DataTable table = new DataTable();
+        ProductData productDataAccess;
+        public ProductController()
+        {
+            this.productDataAccess = new ProductData();
+        }
 
         public HttpResponseMessage Get()
         {
-            string query = "SELECT * FROM Product";
-            var cmd = new SqlCommand(query, con);
-            var data = new SqlDataAdapter(cmd);
-            {
-                cmd.CommandType = CommandType.Text;
-                data.Fill(table);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            var productDetails = productDataAccess.GetProduct();
+            return Request.CreateResponse(HttpStatusCode.OK, productDetails);
         }
 
         //this api use to product edit page
@@ -33,18 +31,12 @@ namespace InventoryManagementAPI.Controllers
         [Route("api/Product/GetProductDetails/{productId}")]
         public HttpResponseMessage GetProductDetails(int productId)
         {
-            string query = "SELECT * FROM Product WHERE ProductID='" + productId + "'";
-            var cmd = new SqlCommand(query, con);
-            var data = new SqlDataAdapter(cmd);
-            {
-                cmd.CommandType = CommandType.Text;
-                data.Fill(table);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            var getProductDetails = productDataAccess.GetProductById(productId);
+            return Request.CreateResponse(HttpStatusCode.OK, getProductDetails);
         }
 
         //this api use to purchase and order page
-        [HttpGet]
+        /*[HttpGet]
         [Route("api/Product/GetProduct")]
         public HttpResponseMessage GetProduct()
         {
@@ -56,66 +48,20 @@ namespace InventoryManagementAPI.Controllers
                 data.Fill(table);
             }
             return Request.CreateResponse(HttpStatusCode.OK, table);
-        }
+        }*/
 
         public string Post(Product product)
         {
-            try
-            {
-                string query = @"INSERT INTO Product 
-                                VALUES('" + product.ProductName + @"',
-                                        '" + product.BrandName + @"',
-                                        '" + product.Label + @"',
-                                        '" + product.StartInventory + @"',
-                                        '" + product.MinimumInventory + @"',
-                                        '" + product.UnitPrice + @"',
-                                        '" + product.SellPrice + @"')";
-
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
-                }
-                //table.Clear();
-                return "Add Successfully!!";
-            }
-
-            catch
-            {
-                return "Failed to Add!!";
-            }
+            var productDetails = productDataAccess.StoreProduct(product);
+            return productDetails;
         }
 
         public string Put(Product product)
         {
             if (product.ProductID != null)
             {
-                try
-                {
-                    string query = @"UPDATE Product SET 
-                                ProductName='" + product.ProductName + @"', 
-                                BrandName='" + product.BrandName + @"', 
-                                Label='" + product.Label + @"', 
-                                StartInventory='" + product.StartInventory + @"', 
-                                MinimumInventory='" + product.MinimumInventory + @"', 
-                                UnitPrice='" + product.UnitPrice + @"', 
-                                SellPrice='" + product.SellPrice + @"'
-                                WHERE ProductID='" + product.ProductID + @"'";
-
-                    var cmd = new SqlCommand(query, con);
-                    var data = new SqlDataAdapter(cmd);
-                    {
-                        cmd.CommandType = CommandType.Text;
-                        data.Fill(table);
-                    }
-                    return "Update Successfully!!";
-                }
-
-                catch
-                {
-                    return "Failed to Update!!";
-                }
+                var productDetails = productDataAccess.ModifyProduct(product);
+                return productDetails;
             }
             else
             {
@@ -125,22 +71,14 @@ namespace InventoryManagementAPI.Controllers
 
         public string Delete(int id)
         {
-            try
+            if (id != null)
             {
-                string query = "DELETE FROM Product WHERE ProductID='" + id + "'";
-
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
-                }
-                return "Delete Successfully!!";
+                var productDetails = productDataAccess.DeleteProduct(id);
+                return productDetails;
             }
-
-            catch
+            else
             {
-                return "Failed to Delete!!";
+                return "Some data are missing!!";
             }
         }
     }
