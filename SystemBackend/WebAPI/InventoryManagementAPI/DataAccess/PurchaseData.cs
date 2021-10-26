@@ -30,8 +30,8 @@ namespace InventoryManagementAPI.DataAccess
                     while (data.Read())
                     {
                         Purchase purchase = new Purchase();
-                        purchase.ProductID = data.GetInt32(0);
-                        purchase.PurchaseID = data.GetInt32(1);
+                        purchase.PurchaseID = data.GetInt32(0);
+                        purchase.ProductName = data["ProductName"].ToString();
                         purchase.PurchaseDate = data["PurchaseDate"].ToString();
                         purchase.ReceiveQuantity = data["ReceiveQuantity"].ToString();
                         purchase.SupplierFirstName = data["SupplierFirstName"].ToString();
@@ -62,9 +62,9 @@ namespace InventoryManagementAPI.DataAccess
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                IDataReader data = cmd.ExecuteReader();
+                var data = new SqlDataAdapter(cmd);
                 {
+                    data.Fill(table);
                     return "Add Successfully!!";
                 }
 
@@ -85,9 +85,11 @@ namespace InventoryManagementAPI.DataAccess
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                IDataReader data = cmd.ExecuteReader();
-                return "Delete Successfully!!";
+                var data = new SqlDataAdapter(cmd);
+                {
+                    data.Fill(table);
+                    return "Delete Successfully!!";
+                }
             }
             catch
             {

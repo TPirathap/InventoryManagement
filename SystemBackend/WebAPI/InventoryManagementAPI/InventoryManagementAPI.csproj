@@ -168,15 +168,20 @@
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataAccess\BaseConnection.cs" />
+    <Compile Include="DataAccess\OrderData.cs" />
     <Compile Include="DataAccess\ProductData.cs" />
     <Compile Include="DataAccess\PurchaseData.cs" />
+    <Compile Include="DataAccess\ReportData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\CalculateStock.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Provider\OrderProvider.cs" />
     <Compile Include="Models\Provider\ProductsProvider.cs" />
     <Compile Include="Models\Provider\PurchaseProvider.cs" />
+    <Compile Include="Models\Provider\ReportProvider.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,7 +239,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Logic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

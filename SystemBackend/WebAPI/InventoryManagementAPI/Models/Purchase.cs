@@ -9,6 +9,7 @@ namespace InventoryManagementAPI.Models
     {
         public int PurchaseID { get; set; }
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public string PurchaseDate { get; set; }
         public string ReceiveQuantity { get; set; }
         public string SupplierFirstName { get; set; }

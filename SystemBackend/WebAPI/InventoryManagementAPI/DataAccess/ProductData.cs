@@ -94,12 +94,11 @@ namespace InventoryManagementAPI.DataAccess
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                IDataReader data = cmd.ExecuteReader();
+                var data = new SqlDataAdapter(cmd);
                 {
+                    data.Fill(table);
                     return "Add Successfully!!";
                 }
-                
             }
 
             catch
@@ -125,9 +124,9 @@ namespace InventoryManagementAPI.DataAccess
 
                     SqlCommand cmd = new SqlCommand(query, con);
                     cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteNonQuery();
-                    IDataReader data = cmd.ExecuteReader();
+                    var data = new SqlDataAdapter(cmd);
                     {
+                        data.Fill(table);
                         return "Update Successfully!!";
                     }
                 }
@@ -150,9 +149,9 @@ namespace InventoryManagementAPI.DataAccess
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                IDataReader data = cmd.ExecuteReader();
+                var data = new SqlDataAdapter(cmd);
                 {
+                    data.Fill(table);
                     return "Delete Successfully!!";
                 }
             }

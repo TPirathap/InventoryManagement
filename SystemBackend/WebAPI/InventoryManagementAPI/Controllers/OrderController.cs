@@ -1,4 +1,6 @@
-﻿using InventoryManagementAPI.Models;
+﻿using InventoryManagementAPI.DataAccess;
+using InventoryManagementAPI.Logic;
+using InventoryManagementAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,74 +15,45 @@ namespace InventoryManagementAPI.Controllers
 {
     public class OrderController : ApiController
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["InventoryManagement"].ConnectionString);
-        DataTable table = new DataTable();
+        OrderData orderDataAccess;
+        CalculateStock orderLogic;
+        public OrderController()
+        {
+            this.orderDataAccess = new OrderData();
+            this.orderLogic = new CalculateStock();
+        }
 
         public HttpResponseMessage Get()
         {
-            string query = @"SELECT Orders.*, Product.ProductName
-                            FROM Orders
-                            INNER JOIN Product ON Product.ProductID=Orders.ProductID";
-            var cmd = new SqlCommand(query, con);
-            var data = new SqlDataAdapter(cmd);
-            {
-                cmd.CommandType = CommandType.Text;
-                data.Fill(table);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            var orderDetails = orderDataAccess.GetOrder();
+            return Request.CreateResponse(HttpStatusCode.OK, orderDetails);
+        }
+
+        //this api use to get order details and product in stock
+        [HttpGet]
+        [Route("api/Order/GetAllOrder")]
+        public HttpResponseMessage GetOrder()
+        {
+            var orderDetails = orderLogic.CountStock();
+            return Request.CreateResponse(HttpStatusCode.OK, orderDetails);
         }
 
         public string Post(Order order)
         {
-            var statusDetails = "Active";
-            try
-            {
-                string query = @"INSERT INTO Orders 
-                                VALUES('" + order.ProductID + @"',
-                                        '" + order.InvoiceNo + @"',
-                                        '" + order.OrderDate + @"',
-                                        '" + order.ShippedQuantity + @"',
-                                        '" + order.TotalAmount + @"',
-                                        '" + order.CustomerFirstName + @"',
-                                        '" + order.CustomerLastName + @"',
-                                        '" + statusDetails + @"')";
-
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
-                }
-                return "Add Successfully!!";
-            }
-
-            catch
-            {
-                return "Failed to Add!!";
-            }
+            var orderDetails = orderDataAccess.StoreOrder(order);
+            return orderDetails;
         }
 
         public string Put(Order order)
         {
-            var statusDetails = "Deleted";
-            try
+            if (order.OrderID != null)
             {
-                string query = @"UPDATE Orders SET 
-                                StatusDetail='" + statusDetails + @"'
-                                WHERE OrderID='" + order.OrderID + @"'";
-
-                var cmd = new SqlCommand(query, con);
-                var data = new SqlDataAdapter(cmd);
-                {
-                    cmd.CommandType = CommandType.Text;
-                    data.Fill(table);
-                }
-                return "Delete Successfully!!";
+                var orderDetails = orderDataAccess.ModifyOrder(order);
+                return orderDetails;
             }
-
-            catch
+            else
             {
-                return "Failed to Delete!!";
+                return "Some data are missing!!";
             }
         }
     }
