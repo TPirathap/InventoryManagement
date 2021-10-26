@@ -11,9 +11,9 @@ export class OrdersService {
 
   readonly APIUrl = "http://localhost:64570/api";
   constructor(private http:HttpClient) { }
-
-  getProduct():Observable<Product[]>{
-    return this.http.get<Product[]>(this.APIUrl + '/Product/GetProduct');    
+//this api used home page 
+  getAllOrder():Observable<Product[]>{
+    return this.http.get<Product[]>(this.APIUrl + '/Order/GetAllOrder');    
   }
 
   getOrderDetails():Observable<Orders[]>{

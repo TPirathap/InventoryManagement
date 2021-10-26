@@ -37,7 +37,7 @@ export class InventoryComponent implements OnInit {
   }
 
   getAllOrders(){
-    this.orderService.getOrderDetails().subscribe((data:any)=>{this.ordersList = data;});
+    this.orderService.getAllOrder().subscribe((data:any)=>{this.ordersList = data;});
   }
 
 }

@@ -13,7 +13,8 @@ export class PurchaseService {
   constructor(private http:HttpClient) { }
 
   getProduct():Observable<Product[]>{
-    return this.http.get<Product[]>(this.APIUrl + '/Product/GetProduct');    
+    //return this.http.get<Product[]>(this.APIUrl + '/Product/GetProduct'); 
+    return this.http.get<Product[]>(this.APIUrl + '/Product');   
   }
 
   getPurchaseDetails():Observable<Purchase[]>{

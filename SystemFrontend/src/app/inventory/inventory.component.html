@@ -190,6 +190,7 @@
                                     <th scope="col">Order Date</th>
                                     <th scope="col">Total Price</th>
                                     <th scope="col">Shipped Quantity</th>
+                                    <th scope="col">In Stock</th>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let dataItem of ordersList | searchOrder:searchOrders">
@@ -199,6 +200,7 @@
                                     <td>{{dataItem.OrderDate | date:'dd/MM/yyyy'}}</td>
                                     <td>{{dataItem.TotalAmount | currency: 'LKR': 'code'}}</td>
                                     <td>{{dataItem.ShippedQuantity}}</td>
+                                    <td>{{dataItem.InStock}}</td>
                                 </tr>
                             </tbody>
                         </table>
